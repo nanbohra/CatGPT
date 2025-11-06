@@ -12,11 +12,11 @@ emotion_model = pipeline("text-classification",
 # Up-sampling the emotions + adding adjectives for diverse searches
 # Based on j-hartmann model classes
 emotion_labels_upsampled = {
-    "anger": ["angry", "furious", "mad", "annoyed", "irritated", "upset"],
+    "anger": ["angry", "furious", "mad", "annoyed", "irritated", "upset", "fighting", "punch"],
     "disgust": ["gross", "ew", "grossed out", "puke"],
     "fear": ["scared", "worried", "terrified", "anxious"],
-    "joy": ["happy", "excited", "joy", "dancing", "woohoo","yay", "yippee", "cute"],
-    "neutral": ["neutral", "sleeping", "cool", "alright", "nice", "chill"],
+    "joy": ["happy", "excited", "smiling", "smile", "joy", "dancing", "woohoo","yay", "yippee", "cute"],
+    "neutral": ["neutral", "", "funny", "sleeping", "cool", "alright", "nice", "chill"],
     "sadness": ["sad", "unhappy", "crying", "sobbing", "lonely"],
     "surprise": ["surprised", "shocked", "startled"]
 }

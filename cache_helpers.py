@@ -2,7 +2,7 @@ import time
 import random
 
 TENOR_CACHE = {}
-CACHE_TTL = 600
+CACHE_TTL = 300
 
 # Retrieve from cache if TTL hasn't expired
 def get_cached_results(emotion):
