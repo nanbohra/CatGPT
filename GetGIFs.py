@@ -14,8 +14,13 @@ AVOID_WORDS = {"kiss", "dog", "puppy", "baby", "human", "person"}
 GIF_LIMIT = 10
 TENOR_KEY = os.getenv("TENOR_KEY")
 
+WRONG_TENOR_KEY = "WRONG_KEY" # testing failure fallback for status 40X
+
+
 def request_tenor_gifs_and_stickers(emotion, limit=10):
-    tenor_key = TENOR_KEY
+    print("Using modified request_tenor_gifs_and_stickers()")
+
+    tenor_key = WRONG_TENOR_KEY
     results = []
 
     gif_url = f"https://tenor.googleapis.com/v2/search?q={emotion} {GIF_BASE}&key={tenor_key}&limit={limit}&contentfilter=medium&media_filter=minimal"
