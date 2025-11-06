@@ -21,11 +21,7 @@ def get_gif():
     emotion_keywords = upsample_emotions(emotion_prediction) # DOESNT HAVE CAT APPENDED
     logging.info(f"Predicted emotion: {emotion_prediction}, Keywords for querying: {emotion_keywords}")
     
-    all_results = []
-    for keyword in emotion_keywords:
-        results = request_tenor_gifs_and_stickers(keyword) # ADDS CAT TO SEARCH QUERY
-        all_results.extend(results)
-
+    all_results = request_tenor_gifs_and_stickers(emotion_prediction, emotion_keywords) # ADDS CAT TO SEARCH QUERY
     logging.info(f"Fetched {len(all_results)} Tenor results in total.")
 
     filtered_results = filter_tenor_results(all_results, emotion_keywords)

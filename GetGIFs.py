@@ -1,8 +1,7 @@
 import requests
 import random
-from transformers import pipeline
 
-from SentimentClassifier import upsample_emotions
+from cache_helpers import get_cached_results, store_to_cache
 
 import os
 from dotenv import load_dotenv
@@ -11,56 +10,37 @@ load_dotenv()
 GIF_BASE = "cat"
 GIF_BASE_SYN = {"cat", "kitty", "kitten"}
 AVOID_WORDS = {"kiss", "dog", "puppy", "baby", "human", "person"}
-GIF_LIMIT = 10
+GIF_LIMIT = 15
 TENOR_KEY = os.getenv("TENOR_KEY")
 
 WRONG_TENOR_KEY = "WRONG_KEY" # testing failure fallback for status 40X
 
 
-def request_tenor_gifs_and_stickers(emotion, limit=10):
-    print("Using modified request_tenor_gifs_and_stickers()")
 
-    tenor_key = WRONG_TENOR_KEY
-    results = []
-
-    gif_url = f"https://tenor.googleapis.com/v2/search?q={emotion} {GIF_BASE}&key={tenor_key}&limit={limit}&contentfilter=medium&media_filter=minimal"
-    try:
-        r = requests.get(gif_url, timeout=5)
-        r.raise_for_status()
-        results.extend(r.json().get("results", []))
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching GIFs for {emotion}: {e}")
-
-    sticker_url = f"https://tenor.googleapis.com/v2/search?q={emotion} {GIF_BASE}&key={tenor_key}&limit={limit}&searchfilter=sticker,-static&contentfilter=medium&media_filter=minimal"
-    try:
-        r = requests.get(sticker_url, timeout=5)
-        r.raise_for_status()
-        results.extend(r.json().get("results", []))
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching Stickers for {emotion}: {e}")
-
-    return results
-
-
-def request_tenor_gifs(emotion, limit=15):
+def request_tenor_gifs_and_stickers(emotion, emotion_keywords, limit=GIF_LIMIT):
+    cached = get_cached_results(emotion)
+    if cached:
+        print(f"Using cached results for {emotion}.")
+        return cached
+    
     tenor_key = TENOR_KEY
-    search_terms = [f"{emotion}" + GIF_BASE]
-
     results = []
+    
+    for keyword in emotion_keywords: 
+        search_term = f"{keyword} {GIF_BASE}"
 
-    for term in search_terms:
-        gif_url = f"https://tenor.googleapis.com/v2/search?q={term}&key={tenor_key}&limit={limit}&contentfilter=medium&media_filter=minimal"
+        gif_url = f"https://tenor.googleapis.com/v2/search?q={search_term}&key={tenor_key}&limit={limit}&contentfilter=medium&media_filter=minimal"
         try:
             r = requests.get(gif_url, timeout=5)
             r.raise_for_status()
             r = r.json()
             results.extend(r.get("results", []))
         except requests.exceptions.RequestException as e:
-            print(f"Error fetching GIFs for {term}: {e}")
+            print(f"Error fetching GIFs for {search_term}: {e}")
             continue
 
 
-        sticker_url = f"https://tenor.googleapis.com/v2/search?q={term}&key={tenor_key}&limit={limit}&searchfilter=sticker&contentfilter=medium&media_filter=minimal"
+        sticker_url = f"https://tenor.googleapis.com/v2/search?q={search_term}&key={tenor_key}&limit={limit}&searchfilter=sticker&contentfilter=medium&media_filter=minimal"
         try:
             r = requests.get(sticker_url, timeout=5)
             r.raise_for_status()
@@ -68,10 +48,13 @@ def request_tenor_gifs(emotion, limit=15):
             # print(r)
             results.extend(r.get("results", []))
         except requests.exceptions.RequestException as e:
-            print(f"Error fetching Stickers for {term}: {e}")
+            print(f"Error fetching stickers for {search_term}: {e}")
             continue
 
-        # results += [r['media_formats']['gif']['url'] for r in res['results']]
+    # results += [r['media_formats']['gif']['url'] for r in res['results']]    
+    if results:
+        store_to_cache(emotion, results)
+    
     return results
 
 
@@ -94,11 +77,11 @@ def filter_tenor_results(results, emotion_keywords):
 
     return filtered
 
-def choose_gif(responses):
-    if not responses:
+def choose_gif(results):
+    if not results:
         return None, None
 
-    chosen = random.choice(responses)
+    chosen = random.choice(results)
     url = None
     if "media_formats" in chosen:
         if "gif" in chosen["media_formats"]:
@@ -118,10 +101,10 @@ def choose_gif(responses):
 
     return url, metadata
 
-def find_gif(query):
-    result = request_tenor_gifs(query)
-    emotion_kywds = upsample_emotions(result)
-    filtered_results = filter_tenor_results(result, emotion_kywds) # filter WIP
-    gif = choose_gif(filtered_results)
-    return gif
+# def find_gif(query):
+#     result = request_tenor_gifs_and_stickers(query)
+#     emotion_kywds = upsample_emotions(result)
+#     filtered_results = filter_tenor_results(result, emotion_kywds) # filter WIP
+#     gif = choose_gif(filtered_results)
+#     return gif
 
