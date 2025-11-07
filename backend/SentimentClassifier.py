@@ -15,10 +15,10 @@ emotion_labels_upsampled = {
     "anger": ["angry", "furious", "mad", "annoyed", "irritated", "upset", "fighting", "punch"],
     "disgust": ["gross", "ew", "grossed out", "puke"],
     "fear": ["scared", "worried", "terrified", "anxious"],
-    "joy": ["happy", "excited", "smiling", "smile", "joy", "dancing", "woohoo","yay", "yippee", "cute"],
+    "joy": ["happy", "excited", "smiling", "smile", "jumping", "hug", "joy", "dancing", "woohoo","yay", "yippee", "cute"],
     "neutral": ["neutral", "", "funny", "sleeping", "cool", "alright", "nice", "chill"],
     "sadness": ["sad", "unhappy", "crying", "sobbing", "lonely"],
-    "surprise": ["surprised", "shocked", "startled"]
+    "surprise": ["surprised", "shocked", "gasp", "flabbergasted", "startled"]
 }
 
 def classify_sentiment(text):
