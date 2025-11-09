@@ -1,3 +1,4 @@
+import './style.css';
 import React, { useState } from 'react';
 
 function App() {
@@ -35,8 +36,6 @@ function App() {
           Get GIF
         </button>
       </form>
-
-      
       {gifData && (
       <div style={{ marginTop: "2rem" }}>
         <h2>Detected Emotion: {gifData.emotion}</h2>

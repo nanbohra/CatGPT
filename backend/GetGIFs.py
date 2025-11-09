@@ -9,7 +9,7 @@ load_dotenv()
 
 GIF_BASE = "cat"
 GIF_BASE_SYN = {"cat", "kitty", "kitten"}
-AVOID_WORDS = {"kiss", "dog", "puppy", "baby", "human", "person"}
+AVOID_WORDS = {"kiss", "dog", "puppy", "baby", "human", "person", "cartoon", "drawing"}
 GIF_LIMIT = 15
 TENOR_KEY = os.getenv("TENOR_KEY")
 
