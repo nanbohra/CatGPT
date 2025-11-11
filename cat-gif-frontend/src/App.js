@@ -106,11 +106,13 @@ function App() {
                   <div className="user-message">
                     {message.content}
                   </div>
+                  <img src={require('./css/user_icon.png')} alt="user" className="message-icon" />
                 </div>
               );
             } else if (message.type === 'bot') {
               return (
                 <div key={index} className="message-row bot-row">
+                  <img src={require('./css/catgpt_icon.png')} alt="catgpt" className="message-icon" />
                   <div className="gif-bubble">
                     <img
                       src={message.gifURL}
@@ -128,6 +130,7 @@ function App() {
             } else if (message.type === 'error'){
               return (
                 <div key={index} className='message-row bot-row'>
+                  <img src={require('./css/catgpt_icon.png')} alt="catgpt" className="message-icon" />
                   <div className="bot-message">
                     <p className="error-message">{message.content}</p>
                   </div>

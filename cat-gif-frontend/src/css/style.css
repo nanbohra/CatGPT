@@ -28,6 +28,7 @@ html, body{
   text-align: center;
   width: 100%;
   transition: all 0.3s ease;
+  padding-bottom: 1rem;
 }
 
 .chat-header h1{
@@ -128,7 +129,7 @@ html, body{
     padding: 0.75rem;
     font-size: 1rem;
     border-radius: 8px;
-    border: 2px solid #4f46e5;
+    border: 2px solid #5456cc;
     background-color: #374151;
     color: #f9fafb;
 
@@ -136,7 +137,7 @@ html, body{
 
 .chat-input:focus {
   outline: none;
-  border-color: #6366f1;
+  border-color: #5456cc;
 }
 
 
@@ -147,7 +148,7 @@ html, body{
     font-size: 1rem;
     border-radius: 8px;
     border: none;
-    background-color: #4f46e5;
+    background-color: #5456cc;
     color: white;
     cursor: pointer;
 }
@@ -181,6 +182,7 @@ html, body{
 .message-row {
   display: flex;
   width: 100%;
+  align-items: flex-end;
 }
 
 .user-row {
@@ -192,7 +194,7 @@ html, body{
 }
 
 .user-message {
-  background-color: #4f46e5;
+  background-color: #5456cc;
   color: white;
   padding: 0.75rem 1rem;
   border-radius: 18px;
@@ -235,4 +237,21 @@ html, body{
   border-radius: 12px;
   border-left: 4px solid #dc2626;
   margin-top: 0;
+}
+
+.message-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  margin-bottom: 0.25rem;
+}
+
+.user-row .message-icon{
+  margin-left: 0.5rem;
+}
+
+.bot-row .message-icon{
+  margin-right: 0.5rem;
 }
