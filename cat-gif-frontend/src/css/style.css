@@ -255,3 +255,42 @@ html, body{
 .bot-row .message-icon{
   margin-right: 0.5rem;
 }
+
+
+
+
+
+/* Adding share button functionalities 
+   Temporary addition; still testing */
+
+.share-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  justify-content: center;
+}
+
+/* Individual share button */
+.share-btn {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #4f46e5;
+  background-color: #5456cc;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.share-btn:hover {
+  background-color: #4338ca;
+  color: white;
+}
+
+/* Copy button specifically -- need to add copied state -- maybe not */
+.share-btn.copied {
+  background-color: #10b981;
+  border-color: #10b981;
+  color: white;
+}
+

@@ -2,8 +2,9 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import logging
 
+
 from SentimentClassifier import classify_sentiment, upsample_emotions
-from GetGIFs import request_tenor_gifs_and_stickers, filter_tenor_results, choose_gif
+from GetGIFs import request_tenor_gifs_and_stickers, filter_tenor_results, choose_gif, clear
 
 app = Flask(__name__)
 CORS(app)
@@ -47,4 +48,6 @@ def get_gif():
 
 
 if __name__ == "__main__":
+    clear()
+    logging.info("Cache cleared on server startup")
     app.run(debug=True)

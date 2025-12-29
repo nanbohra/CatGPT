@@ -1,7 +1,7 @@
 import requests
 import random
 
-from cache_helpers import get_cached_results, store_to_cache
+from cache_helpers import get_cached_results, store_to_cache, clear_cache
 
 import os
 from dotenv import load_dotenv
@@ -14,7 +14,6 @@ GIF_LIMIT = 15
 TENOR_KEY = os.getenv("TENOR_KEY")
 
 WRONG_TENOR_KEY = "WRONG_KEY" # testing failure fallback for status 40X
-
 
 
 def request_tenor_gifs_and_stickers(emotion, emotion_keywords, limit=GIF_LIMIT):
@@ -56,6 +55,9 @@ def request_tenor_gifs_and_stickers(emotion, emotion_keywords, limit=GIF_LIMIT):
         store_to_cache(emotion, results)
     
     return results
+
+def clear():
+    clear_cache
 
 
 def filter_tenor_results(results, emotion_keywords):

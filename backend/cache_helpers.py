@@ -8,11 +8,13 @@ CACHE_TTL = 300
 def get_cached_results(emotion):
     entry = TENOR_CACHE.get(emotion)
 
+    # if there IS a cache entry on the emotion 
     if entry:
         results, timestamp = entry
         if time.time() - timestamp < CACHE_TTL:
             return results
         
+        # expired cache entries are deleted
         else:
             del TENOR_CACHE[emotion]
     
@@ -21,3 +23,6 @@ def get_cached_results(emotion):
 # Add to cache
 def store_to_cache(emotion, results):
     TENOR_CACHE[emotion] = (results, time.time())
+
+def clear_cache():
+    TENOR_CACHE.clear()

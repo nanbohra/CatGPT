@@ -30,6 +30,35 @@ function App() {
     return errorMsgs[Math.floor(Math.random() * errorMsgs.length)];
   };
 
+  const copyToClipboard = async (url, buttonId) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      // Visual feedback -- handle this in the button click
+      return true;
+    } catch (err) {
+      console.error('Failed to copy:', err);
+      return false;
+    }
+  };
+
+  /* Sharing functions */
+  const shareToWhatsApp = (url) => {
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent('Check out this cat GIF! ' + url)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const shareToTwitter = (url) => {
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent('Check out this cat GIF!')}&url=${encodeURIComponent(url)}`;
+    window.open(twitterUrl, '_blank');
+  };
+
+  const shareToFacebook = (url) => {
+    const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+    window.open(facebookUrl, '_blank');
+  };
+
+  /* End sharing functions */
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -124,6 +153,34 @@ function App() {
                         }
                       }}
                     />
+                    {/* Share buttons */}
+                    <div className="share-buttons">
+                      <button 
+                        className="share-btn" 
+                        onClick={() => copyToClipboard(message.gifURL)}
+                        >
+                          Copy URL
+                          </button>
+                          <button 
+                            className="share-btn" 
+                            onClick={() => shareToWhatsApp(message.gifURL)}
+                          >
+                            WhatsApp
+                          </button>
+                          <button 
+                            className="share-btn" 
+                            onClick={() => shareToTwitter(message.gifURL)}
+                          >
+                            X
+                          </button>
+                          <button 
+                            className="share-btn" 
+                            onClick={() => shareToFacebook(message.gifURL)}
+                          >
+                            Facebook
+                          </button>
+                        </div>
+
                   </div>
                 </div>
               );
