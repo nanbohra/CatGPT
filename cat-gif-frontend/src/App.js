@@ -142,6 +142,7 @@ function App() {
               return (
                 <div key={index} className="message-row bot-row">
                   <img src={require('./css/catgpt_icon.png')} alt="catgpt" className="message-icon" />
+                  <div className='bot-content'>
                   <div className="gif-bubble">
                     <img
                       src={message.gifURL}
@@ -153,34 +154,38 @@ function App() {
                         }
                       }}
                     />
+                    </div>
                     {/* Share buttons */}
-                    <div className="share-buttons">
+                    <div className="share-buttons side-share">
                       <button 
-                        className="share-btn" 
+                        className="share-icon-btn" 
                         onClick={() => copyToClipboard(message.gifURL)}
                         >
-                          Copy URL
-                          </button>
+                          <img src={require('./css/icon-link.png')} alt="Copy URL" />
+                        </button>
+
                           <button 
-                            className="share-btn" 
+                            className="share-icon-btn" 
                             onClick={() => shareToWhatsApp(message.gifURL)}
                           >
-                            WhatsApp
+                            <img src={require('./css/icon-whatsapp.png')} alt="WhatsApp" />
                           </button>
+
                           <button 
-                            className="share-btn" 
+                            className="share-icon-btn" 
                             onClick={() => shareToTwitter(message.gifURL)}
                           >
-                            X
+                            <img src={require('./css/icon-x.png')} alt="X" />
                           </button>
+
                           <button 
-                            className="share-btn" 
+                            className="share-icon-btn" 
                             onClick={() => shareToFacebook(message.gifURL)}
                           >
-                            Facebook
+                            <img src={require('./css/icon-facebook.png')} alt="Facebook" />
                           </button>
                         </div>
-
+                        
                   </div>
                 </div>
               );
