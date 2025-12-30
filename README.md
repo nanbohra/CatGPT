@@ -3,7 +3,7 @@ A chat where your every message is answered by a suitable cat GIF. The cat gets 
 
 TODO
 1. Update share buttons -- move to side of bot chat -- DONE
-2. Add about me button
+2. Add about me button -- DONE
 3. Deploy 
 
 ---
