@@ -7,7 +7,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [chatStarted, setChatStarted] = useState(false);
   const chatEndRef = useRef(null);
-  
+  const [showAbout, setShowAbout] = useState(false);
 
   const loadingMsgs = [
     "Purr-paring your content...",
@@ -115,9 +115,13 @@ function App() {
   }, [chatHistory, loading]);
 
   return (
+    <>
     <div className={`chat-container ${chatStarted ? "chat-started": ""}`}>
       {/* Header */}
       <header className='chat-header'>
+        <button className="about-btn" onClick={() => setShowAbout(true)}>
+          About Meow
+        </button>
         <h1>CatGPT</h1>
       </header>
 
@@ -229,7 +233,42 @@ function App() {
         </form>
       </div>
     </div>
-    
+
+    {/* About Modal */}
+      {showAbout && (
+        <>
+          <div className="modal-overlay" onClick={() => setShowAbout(false)} />
+          <div className="modal-content">
+            <button className="modal-close" onClick={() => setShowAbout(false)}>
+              ×
+            </button>
+            <h2>About CatGPT</h2>
+            <div className="modal-body">
+              <h3 style={{ fontSize: '1.75rem' }}>hello, i'm nandini!</h3>
+              <p>
+                this app is my way of combining today's advances in AI and generative tech with my love for cats as i further explore frontend design, backend optimizations, and ml integrations. life is just better when you bring cat GIFs into the picture. <br />
+                <br />
+                to be clear, i do not have a cat, but i do love them. hahaha.
+              </p>
+              
+              
+              <h3 style={{ textAlign: 'center' }}>Coming Soon!</h3>
+              <p>
+                <strong> Catty Text Responses: </strong> CatGPT will soon answer your questions with text responses, and you'll truly feel like you're talking to a cat. Or as close as we can get with AI.
+              </p>
+              
+              <h3 style={{ textAlign: 'center' }}>Tech Stack & Behind-the-Scenes</h3>
+              <ul>
+                <li><strong>Frontend:</strong> JavaScript, React, CSS</li>
+                <li><strong>Backend:</strong> Flask, Python</li>
+                <li><strong>ML:</strong> Jochen Hartmann's <em>Emotion English DistilRoBERTa-base</em>, found <a href="https://huggingface.co/j-hartmann/emotion-english-distilroberta-base" target="_blank" rel="noopener noreferrer">here</a> .</li>
+                <li><strong>APIs:</strong> Tenor API for GIFs</li>
+              </ul>
+            </div>
+          </div>
+        </>
+      )}
+    </>
   );
 }
 export default App;
