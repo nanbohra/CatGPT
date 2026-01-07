@@ -19,7 +19,7 @@ function App() {
   const errorMsgs = [
     "Meow-ch! Something went wrong. Try again soon!",
     "This is un-fur-tunate. The server may be down.",
-    "Unable to fetch response right meow. Please try later."
+    "Unable to fetch a response right meow. Please try later."
   ];
 
   const getRandomLoadingMessage = () => {
