@@ -1,5 +1,6 @@
 import './css/style.css';
 import React, { useState, useRef, useEffect } from 'react';
+const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:5000";
 
 function App() {
   const [text, setText] = useState("");
@@ -74,7 +75,7 @@ function App() {
     setLoading(true);
 
     try{
-    const response = await fetch("http://127.0.0.1:5000/get_gif",{
+    const response = await fetch(`${API_URL}/get_gif`,{
       method: "POST",
       headers: { "Content-Type": "application/json"},
       body: JSON.stringify({ text: userMessage }),
