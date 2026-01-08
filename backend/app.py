@@ -7,7 +7,13 @@ from SentimentClassifier import classify_sentiment, upsample_emotions
 from GetGIFs import request_tenor_gifs_and_stickers, filter_tenor_results, choose_gif, clear
 
 app = Flask(__name__)
-CORS(app)
+
+CORS(
+    app,
+    resources={r"/get_gif": {"origins": ["https://nice-coast-02797c21e.6.azurestaticapps.net"]}},
+    methods=["POST", "OPTIONS"],
+    supports_credentials=False
+)
 
 FILTER = True
 logging.basicConfig(level=logging.INFO, format='[%(asctime)s] %(levelname)s in %(module)s: %(message)s')
