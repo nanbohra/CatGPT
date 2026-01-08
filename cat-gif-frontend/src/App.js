@@ -1,6 +1,10 @@
 import './css/style.css';
 import React, { useState, useRef, useEffect } from 'react';
-const API_URL = process.env.REACT_APP_API_URL || "http://127.0.0.1:5000";
+const API_URL = process.env.REACT_APP_API_URL;
+
+if (!API_URL) {
+  throw new Error("REACT_APP_API_URL is not configured.");
+}
 
 function App() {
   const [text, setText] = useState("");
