@@ -12,6 +12,7 @@ CORS(
     app,
     resources={r"/get_gif": {"origins": ["https://nice-coast-02797c21e.6.azurestaticapps.net"]}},
     methods=["POST", "OPTIONS"],
+    allow_headers=["Content-Type"],
     supports_credentials=False
 )
 
@@ -19,8 +20,11 @@ FILTER = True
 logging.basicConfig(level=logging.INFO, format='[%(asctime)s] %(levelname)s in %(module)s: %(message)s')
 
 
-@app.route("/get_gif", methods=["POST"])
+@app.route("/get_gif", methods=["POST", "OPTIONS"])
 def get_gif():
+    if request.method == "OPTIONS":
+        return "", 200
+
     data = request.get_json()
     user_text = data.get("text", "")
 
