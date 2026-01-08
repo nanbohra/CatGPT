@@ -1,5 +1,4 @@
 import random
-from transformers import pipeline
 import logging
 import requests
 
