@@ -90,5 +90,3 @@ def upsample_emotions(prediction):
     upsampled_emotions = [f"{s}" for s in random.sample(upsampled, min(4, len(upsampled)))]
     return upsampled_emotions
 
-
-print(classify_sentiment("I'm so mad mannnnn"))
